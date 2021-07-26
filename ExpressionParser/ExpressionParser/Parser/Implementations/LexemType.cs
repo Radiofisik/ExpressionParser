@@ -12,6 +12,7 @@ namespace ExpressionParser.Parser
       Plus, Minus, Multiply, Divide,
       Number,
       Func, ParamSeparator,
+      Variable,
       End
    }
 }

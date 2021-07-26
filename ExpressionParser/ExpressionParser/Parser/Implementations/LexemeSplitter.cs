@@ -45,11 +45,24 @@ namespace ExpressionParser.Parser.Implementations
                   lexemes.Add(new Lexeme(LexemeType.ParamSeparator, input[current]));
                   current++;
                   break;
+               case ' ':
+                  current++;
+                  break;
+               case '[':
+                  var varStart = current;
+                  while (current < input.Length && input[current]!=']')
+                  {
+                     current++;
+                  }
+                  lexemes.Add(new Lexeme(LexemeType.Variable, input.Slice(varStart + 1, current - varStart - 1).ToString()));
+                  current++;
+                  break;
                default:
+                  if(current >= input.Length) break;
                   if (Char.IsDigit(input[current]))
                   {
                      var start = current;
-                     while (current < input.Length && char.IsDigit(input[current]) || input[current] == '.' || input[current] == ',')
+                     while (current < input.Length && (char.IsDigit(input[current]) || input[current] == '.' || input[current] == ','))
                      {
                         current++;
                      }

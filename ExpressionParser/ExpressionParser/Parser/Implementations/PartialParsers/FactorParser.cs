@@ -20,6 +20,8 @@ namespace ExpressionParser.Parser.Implementations.PartialParsers
          {
             case LexemeType.Number:
                return new ConstExpression(double.Parse(lexeme.Value));
+            case LexemeType.Variable:
+               return new VariableExpression(lexeme.Value);
             case LexemeType.LeftBracket:
                var result = new ParenthesisExpression(ExprParser.Parse(lexemes));
                lexeme = lexemes.Next();

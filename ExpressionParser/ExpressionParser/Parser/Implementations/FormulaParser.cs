@@ -31,13 +31,11 @@ namespace ExpressionParser.Parser
               * PARSER RULES
           * *------------------------------------------------------------------*/
 
-         //    expr : plusminus* EOF ;
-         //
-         //    plusminus: multdiv ( ( '+' | '-' ) multdiv )* ;
-         //
-         //    multdiv : factor ( ( '*' | '/' ) factor )* ;
-         //
-         //    factor : NUMBER | '(' expr ')' ;
+         //expr : plusminus* EOF ;
+         //plusminus: multdiv ( ( '+' | '-' ) multdiv )* ;
+         //multdiv : factor ( ( '*' | '/' ) factor )* ; // multdiv это factor дальше * или / и другой factor, при этом оператор и фактор могут повторяться бесконечно
+         //func : name(expr(; expr)*)
+         //factor : NUMBER | '(' expr ')' | func | [variable]; // factor это NUMBER или expr в скобках
 
          var lexemes = _lexemeSplitter.ParseLexemes(input);
          return _exprParser.Parse(lexemes);
