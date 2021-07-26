@@ -88,6 +88,27 @@ namespace ExpressionParserTests
             .Be(35.0/7.0 + (5.0*5.0*2.0 + 28.0/7.0)*2 - 5.0/5.0);
       }
 
+      [Fact]
+      public void Function()
+      {
+         // Arrange
+         var parser = BuildContainer().Resolve<IFormulaParser>();
+         const string groupName = "Group 1";
+         var context = new Dictionary<string, object>
+         {
+            [groupName] = new List<double> { 10.0 }
+         };
+         var str = $"sum_b(\"{groupName}\")-10";
+
+         // Act
+         var exp = parser.Parse(str);
+         var result = exp.Compute(context);
+
+         // Assert
+         result.Should()
+            .Be(0.0);
+      }
+
 
       private IContainer BuildContainer()
       {

@@ -57,6 +57,15 @@ namespace ExpressionParser.Parser.Implementations
                   lexemes.Add(new Lexeme(LexemeType.Variable, input.Slice(varStart + 1, current - varStart - 1).ToString()));
                   current++;
                   break;
+               case '"':
+                  var varQStart = current;
+                  while (current < input.Length && (current == varQStart || input[current] != '"'))
+                  {
+                     current++;
+                  }
+                  lexemes.Add(new Lexeme(LexemeType.Variable, input.Slice(varQStart + 1, current - varQStart - 1).ToString()));
+                  current++;
+                  break;
                default:
                   if(current >= input.Length) break;
                   if (Char.IsDigit(input[current]))
@@ -72,7 +81,7 @@ namespace ExpressionParser.Parser.Implementations
                   else if (Char.IsLetter(input[current]))
                   {
                      var start = current;
-                     while (current < input.Length && char.IsLetter(input[current]))
+                     while (current < input.Length && (char.IsLetter(input[current]) || input[current] == '_'))
                      {
                         current++;
                      }
