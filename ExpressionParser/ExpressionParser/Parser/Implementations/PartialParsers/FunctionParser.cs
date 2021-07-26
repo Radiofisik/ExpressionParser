@@ -44,7 +44,7 @@ namespace ExpressionParser.Parser.Implementations.PartialParsers
             {
                throw new Exception($") expected at position {lexemes.Position}");
             }
-            var funcExp = _functions[funcName];
+            var funcExp = _functions[funcName.ToLower()];
             funcExp.Params = funcParams;
             return funcExp;
          }

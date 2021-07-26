@@ -35,7 +35,7 @@ namespace ExpressionParser.Parser
 
          foreach (var function in functions)
          {
-            var functionName = (CustomAttributeExtensions.GetCustomAttribute<FunctionNameAttribute>((MemberInfo)function, true)).Name;
+            var functionName = (CustomAttributeExtensions.GetCustomAttribute<FunctionNameAttribute>((MemberInfo)function, true)).Name.ToLower();
             builder.RegisterType(function)
                .As<BaseFunctionExpression>()
                .Keyed<BaseFunctionExpression>(functionName)
