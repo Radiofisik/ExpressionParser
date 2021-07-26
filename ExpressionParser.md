@@ -404,10 +404,12 @@ else if(Char.IsLetter(input[current]))
 
 получим код, успешно вычисляющий выражение вида `"2*min(25;10)"`
 
+> Получившийся код https://github.com/Radiofisik/ExpressionParser
 
+Использованные источники:
 
->https://www.youtube.com/watch?v=iLnNqqom5KY
->
->https://www.youtube.com/watch?v=UIf-QQjsBuY&list=PLeQDJtBkrIiT0TMQ3muv3zvNdsmBZFOR1&index=4
->
->https://github.com/Arhiser/java_tutorials/blob/master/src/ru/arhiser/parser/Main.java
+- https://www.youtube.com/watch?v=iLnNqqom5KY
+
+- https://www.youtube.com/watch?v=UIf-QQjsBuY&list=PLeQDJtBkrIiT0TMQ3muv3zvNdsmBZFOR1&index=4
+
+- https://github.com/Arhiser/java_tutorials/blob/master/src/ru/arhiser/parser/Main.java

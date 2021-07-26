@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Autofac;
 using ExpressionParser.Expression;
 using ExpressionParser.Parser;
+using ExpressionParser.Parser.Abstraction;
 
 namespace ExpressionParser
 {
@@ -16,9 +18,13 @@ namespace ExpressionParser
          //var result = exp.Compute(new Dictionary<string, object>());
 
 
-
-         var parser = new FormulaParser();
-         var exp = parser.Parse("2*min(25;10)");
+         var cb = new ContainerBuilder();
+         cb.RegisterModule<ParserModule>();
+         var container = cb.Build();
+         
+         
+         var parser = container.Resolve<IFormulaParser>();
+         var exp = parser.Parse("2*min(sqrt(25);10+3)");
          var result = exp.Compute(new Dictionary<string, object>());
 
 

@@ -2,3 +2,5 @@
 ExpressionParser/ExpressionParser/obj/Debug/net5.0/ExpressionParser.csproj.FileListAbsolute.txt
 ExpressionParser/ExpressionParser/obj/
 ExpressionParser/ExpressionParser/bin/
+ExpressionParser/ExpressionParserTests/bin/
+ExpressionParser/ExpressionParserTests/obj/
