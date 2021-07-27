@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ExpressionParser.Exceptions;
 using ExpressionParser.Parser.Abstraction;
 
 namespace ExpressionParser.Parser.Implementations
@@ -15,6 +16,7 @@ namespace ExpressionParser.Parser.Implementations
          var current = 0;
          while (current < input.Length)
          {
+            var startCurrent = current;
             switch (input[current])
             {
                case '(':
@@ -46,6 +48,15 @@ namespace ExpressionParser.Parser.Implementations
                   current++;
                   break;
                case ' ':
+                  current++;
+                  break;
+               case '\n':
+                  current++;
+                  break;
+               case '\r':
+                  current++;
+                  break;
+               case '\t':
                   current++;
                   break;
                case '[':
@@ -91,6 +102,8 @@ namespace ExpressionParser.Parser.Implementations
 
                   break;
             }
+            if(startCurrent == current) throw new WrongFormatException(input.Slice(0, current).ToString());
+
          }
 
          lexemes.Add(new Lexeme(LexemeType.End, string.Empty));

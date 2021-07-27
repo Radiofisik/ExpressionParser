@@ -38,8 +38,7 @@ namespace ExpressionParser.Parser
             var functionName = (CustomAttributeExtensions.GetCustomAttribute<FunctionNameAttribute>((MemberInfo)function, true)).Name.ToLower();
             builder.RegisterType(function)
                .As<BaseFunctionExpression>()
-               .Keyed<BaseFunctionExpression>(functionName)
-               .InstancePerLifetimeScope();
+               .Keyed<BaseFunctionExpression>(functionName);
          }
         
 

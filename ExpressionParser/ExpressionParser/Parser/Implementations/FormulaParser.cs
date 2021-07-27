@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ExpressionParser.Exceptions;
 using ExpressionParser.Expression;
 using ExpressionParser.Parser.Abstraction;
 using ExpressionParser.Parser.Abstraction.PartialParsers;
@@ -38,7 +39,14 @@ namespace ExpressionParser.Parser
          //factor : NUMBER | '(' expr ')' | func | [variable]; // factor это NUMBER или expr в скобках
 
          var lexemes = _lexemeSplitter.ParseLexemes(input);
-         return _exprParser.Parse(lexemes);
+         var result = _exprParser.Parse(lexemes);
+         var end = lexemes.Next();
+         if (end.Type != LexemeType.End)
+         {
+            throw new WrongFormatException("not all lexemes were parsed, probably some operator was missed");
+         }
+
+         return result;
       }
 
    }

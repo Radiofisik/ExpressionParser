@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ExpressionParser.Exceptions;
 using ExpressionParser.Expression;
 using ExpressionParser.Parser.Abstraction.PartialParsers;
 
 namespace ExpressionParser.Parser.Implementations.PartialParsers
 {
-   class MultDivParser: IMultDivParser
+   class MultDivParser : IMultDivParser
    {
       public IFactorParser FactorParser { get; set; }
 
@@ -24,7 +25,12 @@ namespace ExpressionParser.Parser.Implementations.PartialParsers
                   result = new MultiplyExpression(result, FactorParser.Parse(lexemes));
                   break;
                case LexemeType.Divide:
-                  result = new DivideExpression(result, FactorParser.Parse(lexemes));
+                  var right = FactorParser.Parse(lexemes);
+                  if (right is ConstExpression {Value: 0})
+                  {
+                     throw new ParserDivideByZeroException();
+                  }
+                  result = new DivideExpression(result, right);
                   break;
                default:
                   lexemes.Back();

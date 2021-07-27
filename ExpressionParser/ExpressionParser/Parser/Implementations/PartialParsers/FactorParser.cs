@@ -13,13 +13,16 @@ namespace ExpressionParser.Parser.Implementations.PartialParsers
       public IExprParser ExprParser { get; set; }
       public IFunctionParser FunctionParser { get; set; }
 
+      public IConstantParser ConstantParser { get; set; }
+
       public BaseExpression Parse(LexemeBuffer lexemes)
       {
          var lexeme = lexemes.Next();
          switch (lexeme.Type)
          {
             case LexemeType.Number:
-               return new ConstExpression(double.Parse(lexeme.Value));
+               lexemes.Back();
+               return ConstantParser.Parse(lexemes);
             case LexemeType.Variable:
                return new VariableExpression(lexeme.Value);
             case LexemeType.LeftBracket:
